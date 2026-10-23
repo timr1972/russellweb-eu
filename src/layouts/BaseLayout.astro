@@ -11,11 +11,14 @@ const {
   description = 'Watch this space!'
 } = Astro.props;
 
+// Get the base path from your astro.config.mjs (resolves to '/russellweb-eu')
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const navigation = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Blog', href: '/blog/' },
-	{ label: 'Projects', href: '/projects/' },
-	{ label: 'About', href: '/about/' },
+	{ label: 'Home', href: `${baseUrl}/` },
+	{ label: 'Blog', href: `${baseUrl}/blog/` },
+	{ label: 'Projects', href: `${baseUrl}/projects/` },
+	{ label: 'About', href: `${baseUrl}/about/` },
 ];
 ---
 
