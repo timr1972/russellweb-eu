@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+	<section class="py-8 sm:py-14">
+		<p class="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-accent uppercase">
+			<span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+			Engineering notes
+		</p>
+		<h1 class="max-w-3xl text-4xl leading-[1.12] font-semibold tracking-tight text-ink sm:text-5xl md:text-6xl">
+			Building with <span class="text-accent">care and clarity.</span>
+		</h1>
+		<p class="mt-6 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
+			Russellweb is a home for practical ideas on software engineering, kitcar building, and the the crossroads of these two disciplines. I write about the things I learn, the things I build, and the things I wish I had known sooner.
+		</p>
+		<div class="mt-9 flex flex-wrap items-center gap-3">
+			<a
+				href="/blog/"
+				class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-95"
+			>
+				Read the blog
+				<svg
+					class="size-4"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M5 12h14m-7-7 7 7-7 7" />
+				</svg>
+			</a>
+			<a
+				href="/projects/"
+				class="inline-flex min-h-11 items-center justify-center rounded-lg border border-line bg-panel px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-accent/50 hover:text-accent"
+			>
+				Explore projects
+			</a>
+		</div>
+	</section>
+
+	<section aria-labelledby="about-this-site" class="border-t border-line py-8 sm:py-10">
+		<div class="grid gap-6 sm:grid-cols-[minmax(0,1fr)_2fr] sm:gap-12">
+			<h2 id="about-this-site" class="text-sm font-semibold tracking-wide text-ink">Sharing is Caring</h2>
+			<div class="space-y-4 text-base leading-7 text-muted">
+				<p>
+					Good engineering is more than making things work. It is making them understandable, resilient, and a pleasure to use.
+				</p>
+				<p>
+					I code, I build, I learn, I share... and being a poor businessman, I also write about it. This is my personal space to share my thoughts on software engineering, the craft of building a set of very unique kitcars, and the lessons I learn along the way. Maybe I can save you some briused knuckles and a few headaches. Maybe you can save me some too. Either way, I hope you enjoy the ride.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section aria-labelledby="explore" class="border-t border-line py-8 sm:py-10">
+		<div class="mb-5 flex items-end justify-between gap-4">
+			<div>
+				<p class="mb-2 text-xs font-semibold tracking-[0.16em] text-muted uppercase">Find your way</p>
+				<h2 id="explore" class="text-2xl font-semibold tracking-tight text-ink">Explore Russellweb</h2>
+			</div>
+		</div>
+		<div class="grid gap-3 sm:grid-cols-3">
+			<a
+				href="/blog/"
+				class="group rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent/50"
+			>
+				<span class="mb-3 block text-xs font-semibold tracking-wide text-accent uppercase">Writing</span>
+				<span class="flex items-center justify-between gap-3 font-semibold text-ink">
+					Blog
+					<span class="text-muted transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+				</span>
+				<span class="mt-2 block text-sm leading-6 text-muted">This is where most of the updates are to be found.</span>
+			</a>
+			<a
+				href="/projects/"
+				class="group rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent/50"
+			>
+				<span class="mb-3 block text-xs font-semibold tracking-wide text-accent uppercase">In practice</span>
+				<span class="flex items-center justify-between gap-3 font-semibold text-ink">
+					Projects
+					<span class="text-muted transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+				</span>
+				<span class="mt-2 block text-sm leading-6 text-muted">Experiments and useful things, made with intention. Empty, but as I move stuff around you will see the projects and the associated blogs.</span>
+			</a>
+			<a
+				href="/about/"
+				class="group rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent/50"
+			>
+				<span class="mb-3 block text-xs font-semibold tracking-wide text-accent uppercase">The person</span>
+				<span class="flex items-center justify-between gap-3 font-semibold text-ink">
+					About
+					<span class="text-muted transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+				</span>
+				<span class="mt-2 block text-sm leading-6 text-muted">A little more about the person behind the work.</span>
+			</a>
+		</div>
+	</section>
+</BaseLayout>

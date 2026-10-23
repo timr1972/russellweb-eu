@@ -1,0 +1,210 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description? : string;
+}
+
+const { 
+  title = 'Russellweb',
+  description = 'Watch this space!'
+} = Astro.props;
+
+const navigation = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Blog', href: '/blog/' },
+	{ label: 'Projects', href: '/projects/' },
+	{ label: 'About', href: '/about/' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#fbfcfd" />
+		<title>{title}</title>
+		<script is:inline>
+			try {
+				const savedTheme = localStorage.getItem('theme');
+				const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				document.documentElement.dataset.theme =
+					savedTheme === 'light' || savedTheme === 'dark'
+						? savedTheme
+						: systemPrefersDark
+							? 'dark'
+							: 'light';
+			} catch (error) {
+				console.warn('Unable to load the saved theme preference.', error);
+			}
+		</script>
+	</head>
+	<body class="flex min-h-screen flex-col font-sans antialiased">
+		<a
+			href="#main-content"
+			class="sr-only z-50 rounded-md bg-accent px-4 py-2 font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+		>
+			Skip to content
+		</a>
+		<header class="sticky top-0 z-40 border-b border-line/80 bg-page/90 backdrop-blur-md">
+			<div
+				class="mx-auto grid w-full max-w-[900px] grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-5 py-4 sm:grid-cols-[auto_1fr_auto] sm:gap-x-8 sm:px-8"
+			>
+				<a
+					href="/"
+					class="inline-flex w-fit items-center gap-2 text-base font-bold tracking-tight text-ink transition-colors hover:text-accent"
+					aria-label="Russellweb home"
+				>
+					<span class="grid size-7 place-items-center rounded-lg bg-accent text-xs font-bold text-white" aria-hidden="true">
+						R
+					</span>
+					Russellweb
+				</a>
+
+				<nav
+					aria-label="Main navigation"
+					class="col-span-2 -mx-1 flex items-center gap-1 overflow-x-auto sm:col-span-1 sm:mx-0 sm:justify-center"
+				>
+					{
+						navigation.map(({ label, href }) => {
+							const isCurrent = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
+							return (
+								<a
+									href={href}
+									aria-current={isCurrent ? 'page' : undefined}
+									class:list={[
+										'whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors',
+										isCurrent
+											? 'bg-accent-soft text-accent'
+											: 'text-muted hover:bg-panel hover:text-ink',
+									]}
+								>
+									{label}
+								</a>
+							);
+						})
+					}
+				</nav>
+
+				<button
+					id="theme-toggle"
+					type="button"
+					class="col-start-2 row-start-1 grid size-10 place-items-center rounded-lg border border-line bg-panel text-muted transition-colors hover:border-accent/40 hover:text-ink sm:col-start-3"
+					aria-label="Toggle color theme"
+					title="Toggle color theme"
+				>
+					<svg
+						class="theme-icon--sun size-5"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.7"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<circle cx="12" cy="12" r="4" />
+						<path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+					</svg>
+					<svg
+						class="theme-icon--moon size-5"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.7"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+					</svg>
+				</button>
+			</div>
+		</header>
+
+		<main id="main-content" class="mx-auto w-full max-w-[900px] flex-1 px-5 py-12 sm:px-8 sm:py-16">
+			<slot />
+		</main>
+
+		<footer class="mt-auto border-t border-line">
+			<div
+				class="mx-auto flex w-full max-w-[900px] flex-col gap-4 px-5 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8"
+			>
+				<p>Thoughtful software, built one step at a time.</p>
+				<nav aria-label="Footer links" class="flex items-center gap-5">
+					<a
+						href="https://github.com/"
+						class="inline-flex items-center gap-2 transition-colors hover:text-accent"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<svg
+							class="size-4"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							aria-hidden="true"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .1.99 2.15 3.28 1.53.1-.73.4-1.24.72-1.53-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.44.11-2.99 0 0 .95-.3 3.1 1.16a10.8 10.8 0 0 1 5.64 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.7.11 2.99.72.79 1.15 1.8 1.15 3.03 0 4.33-2.63 5.28-5.14 5.56.4.35.77 1.03.77 2.08v3.09c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						GitHub
+					</a>
+					<a href="/rss.xml" class="inline-flex items-center gap-2 transition-colors hover:text-accent">
+						<svg
+							class="size-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.8"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M5 19a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+							<path d="M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9" />
+						</svg>
+						RSS
+					</a>
+				</nav>
+			</div>
+		</footer>
+
+		<script>
+			const themeToggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
+
+			themeToggle?.addEventListener('click', () => {
+				const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+				document.documentElement.dataset.theme = nextTheme;
+
+				try {
+					localStorage.setItem('theme', nextTheme);
+				} catch (error) {
+					console.warn('Unable to save the theme preference.', error);
+				}
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+	.theme-icon--sun {
+		display: none;
+	}
+
+	:global(:root[data-theme='light']) .theme-icon--sun {
+		display: block;
+	}
+
+	:global(:root[data-theme='light']) .theme-icon--moon {
+		display: none;
+	}
+</style>
