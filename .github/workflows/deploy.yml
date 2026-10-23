@@ -11,9 +11,18 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Use a fixed, stable runner version instead of 'latest'
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site output
+
+      # Explicitly force Node 22 (LTS) to ensure Astro has a stable environment
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm' # or 'pnpm' / 'yarn' if you use them
+
+      - name: Install, build, and upload your site
         uses: withastro/action@v3
