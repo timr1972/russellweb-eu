@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://timr1972.github.io',
-  base: '/<your-repo-name>',
+  base: '/russellweb-eu',
 });
 
 
